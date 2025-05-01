@@ -1,21 +1,87 @@
 <!DOCTYPE html>
-<title>REGISTER TO MAIL</title>
-
 <html>
+<head>
+  <title>REGISTER TO MAIL MESSAGE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base target="_top">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000000; /* สีดำเต็มหน้าจอ */
+      overflow: hidden;
+      height: 100vh;
+    }
+    
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    
+    .loader {
+      width: 48px;
+      height: 48px;
+      border: 5px solid #ff5e00;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      animation: rotation 1s linear infinite;
+    }
 
-   <head>
+    @keyframes rotation {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    
+    .loaded iframe {
+      opacity: 1;
+    }
+    
+    .loaded .preloader {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="loader"></div>
+  </div>
+  
+  <!-- เนื้อหาหลัก -->
+  <iframe src="https://script.google.com/macros/s/AKfycbxigaHQELv6Ju4Xj8nPIeDDP4hgs_VKlo-DT7sCuaUgYZB_PFuPUciQ17GbQFTqWRWEOA/exec" 
+          onload="document.body.classList.add('loaded')"></iframe>
 
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-      <base target="_top">
-
-   </head>
-
-   <body>
-
-      <iframe style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;border: 0;" src="https://script.google.com/macros/s/AKfycbxigaHQELv6Ju4Xj8nPIeDDP4hgs_VKlo-DT7sCuaUgYZB_PFuPUciQ17GbQFTqWRWEOA/exec"></iframe>
-
-   </body>
-
+  <script>
+    // Fallback ถ้า iframe โหลดไม่สำเร็จ
+    setTimeout(function() {
+      if (!document.body.classList.contains('loaded')) {
+        document.querySelector('.preloader').innerHTML = 
+          '<p style="color:#ff5e00;text-align:center">กำลังโหลดเนื้อหา...<br>กรุณารอสักครู่</p>';
+      }
+    }, 5000); // 5 วินาที
+  </script>
+</body>
 </html>
